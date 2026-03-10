@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 80%;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+  <h1>URL Shortner</h1>
+  <% if (locals.id) { %>
+   <p>URL Generated:-   localhost:8000/url/<%= id %></p>
+  <% } %>
+  <div>
+    <form action="/url" method="post">
+        <label >Enter your Original Url</label>
+        <input type="text" name="url" placeholder="https://example.com"/>
+        <button type="submit">Generate</button>
+    </form>
+  </div>
+  <div>
+    <% if (locals.urls) { %>
+     <table>
+        <thead>
+            <th>S.No</th>
+            <th>ShortId</th>
+            <th>RedirectURL</th>
+            <th>Clicks</th>
+        </thead>
+        <tbody>
+            <%urls.forEach((url,index) => { %>
+             <tr>
+                <td><%= index+1 %></td>
+                <td><%= url.shortId %></td>
+                <td><%= url.redirectURL %></td>
+                <td><%= url.visitedHistory.length %></td>
+             </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+  </div>
+</body>
+</html>
