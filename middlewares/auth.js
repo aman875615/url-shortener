@@ -21,6 +21,9 @@ function restrictTo(roles=[]){
         next();
     }
 }
+// function restrictToAdmin(req,res,next){
+//     if(!req.user){
+//         return res.redirect('/login');
 module.exports = {
     ckeckForAuth,
     restrictTo,
